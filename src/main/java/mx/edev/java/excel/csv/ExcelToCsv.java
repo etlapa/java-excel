@@ -1,4 +1,4 @@
-package mx.edev.java;
+package mx.edev.java.excel.csv;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -13,13 +13,18 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-//https://dzone.com/articles/the-programmers-way-to-convert-excel-to-csv
+/**
+ * Taken from
+ * https://dzone.com/articles/the-programmers-way-to-convert-excel-to-csv
+ * 
+ * @author martin.tlapa.davila
+ *
+ */
 public class ExcelToCsv {
 
-	private String inputfilePath = "C:\\tmp\\AP364 BANKCARD Interface - Alnova R2 CIF_v1 2.xlsx";
-	private String outputCsvPath = "C:\\tmp\\AP364 BANKCARD Interface - Alnova R2 CIF_v1 2.csv";
+	public void exec(String inputfilePath) {
 
-	public void init() {
+		String outputCsvPath = inputfilePath.replace("xlsx", "csv");
 
 		System.out.println("\nReading Excel file...");
 		System.out.println("\n-----------------------------------------");
@@ -28,6 +33,11 @@ public class ExcelToCsv {
 
 		try (FileInputStream fis = new FileInputStream(new File(inputfilePath));
 				PrintStream out = new PrintStream(new FileOutputStream(outputCsvPath), true, "UTF-8")) {
+
+			// Using the UTF-8 BOM
+			byte[] bom = { (byte) 0xEF, (byte) 0xBB, (byte) 0xBF };
+			out.write(bom);
+
 			XSSFWorkbook workbook = new XSSFWorkbook(fis);
 
 			for (Sheet sheet : workbook) {

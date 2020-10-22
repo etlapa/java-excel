@@ -2,16 +2,14 @@ package mx.edev.java;
 
 import static mx.edev.java.utils.Common.FILE_NAME;
 
+import mx.edev.java.excel.csv.ExcelToCsv;
 import mx.edev.java.excel.reader.ExcelReader;
 import mx.edev.java.excel.updater.ExcelUpdater;
 import mx.edev.java.excel.writer.ExcelWriter;
 
 public class App {
 	public static void main(String[] args) {
-		new ExcelToCsv().init();
-	}
-
-	private static void oldImplementation(String[] args) {
+		
 		String filePath = null;
 		if (args.length > 0) {
 			filePath = args[0];
@@ -22,6 +20,7 @@ public class App {
 		new ExcelWriter().exec(filePath);
 		new ExcelUpdater().exec(filePath);
 		new ExcelReader().exec(filePath);
+		new ExcelToCsv().exec(filePath);
 	}
 
 	private static String getTempFolderPath() {
