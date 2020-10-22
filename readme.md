@@ -17,3 +17,7 @@ in this case, the OS current temporary directory will be taken with the default 
 This project was taken from:
 
 	https://www.concretepage.com/apache-api/read-write-and-update-xlsx-using-poi-in-java
+	
+Version 2003 added:
+Parameter reading removed.
+Same functionality, just for copy/paste for a new project.
